@@ -40,7 +40,7 @@ function easyGame() {
     " Great! You have selected the Easy difficulty level. \n Let's start the game \n";
   console.log(gameIntro);
 
-  async function easyGameEngine() {
+  function easyGameEngine() {
     try {
       rl.question("Enter your guess: ", (number) => {
         user = parseInt(number);
@@ -49,36 +49,36 @@ function easyGame() {
           console.log(msg);
           easyGame();
         }
+        if (chances == 0) {
+          const msg1 = "game over you ran out of chances, you LOSERRRRRR";
+          const msg2 = "well if you wish to play again";
+          console.log(msg1, msg2);
+          return;
+        }
+
+        if (user !== RandomNumber) {
+          chances--;
+          trial++;
+          if (user < RandomNumber) {
+            console.log(` Incorrect! The number is greater than ${user}.`);
+            easyGameEngine();
+          } else if (user > RandomNumber) {
+            console.log(`Incorrect! The number is less than ${user}.`);
+            easyGameEngine();
+          }
+        } else {
+          console.log(
+            ` congratulation you won, \n you guessed the correct number in ${trial} attempts. `
+          );
+          console.log("if you wish to go again: ");
+          difficultyLevel();
+        }
       });
     } catch (error) {
       console.error(error);
     }
   }
   easyGameEngine();
-  if (chances == 0) {
-    const msg1 = "game over you ran out of chances, you LOSERRRRRR";
-    const msg2 = "well if you wish to play again";
-    console.log(msg1, msg2);
-    difficultyLevel();
-  }
-
-  if (user !== RandomNumber) {
-    chances--;
-    trial++;
-    if (user < RandomNumber) {
-      console.log(` Incorrect! The number is greater than ${user}.`);
-      easyGameEngine();
-    } else if (user > RandomNumber) {
-      console.log(`Incorrect! The number is less than ${user}.`);
-      easyGameEngine();
-    }
-  } else {
-    console.log(
-      ` congratulation you won, \n you guessed the correct number in ${trial} attempts. `
-    );
-    console.log("if you wish to go again: ");
-    difficultyLevel();
-  }
 }
 
 introduction();
