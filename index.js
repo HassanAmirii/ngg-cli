@@ -32,6 +32,102 @@ function difficultyLevel() {
   });
 }
 
+function hardGame() {
+  let chances = 3;
+  let trial = 0;
+  let user;
+  const gameIntro =
+    " Great! You have selected the Easy difficulty level. \n Let's start the game \n";
+  console.log(gameIntro);
+
+  function hardGameEngine() {
+    try {
+      rl.question("Enter your guess: ", (number) => {
+        user = parseInt(number);
+        if (isNaN(user)) {
+          const msg = "Text not allowed; kindly input a digit between 1 - 100";
+          console.log(msg);
+          hardGame();
+        }
+        if (chances == 0) {
+          const msg1 = "game over you ran out of chances, you LOSERRRRRR";
+          console.log(msg1);
+          return;
+        }
+
+        if (user !== RandomNumber) {
+          chances--;
+          trial++;
+          if (user < RandomNumber) {
+            console.log(` Incorrect! The number is greater than ${user}.`);
+            hardGameEngine();
+          } else if (user > RandomNumber) {
+            console.log(`Incorrect! The number is less than ${user}.`);
+            hardGameEngine();
+          }
+        } else {
+          console.log(
+            ` congratulation you won, \n you guessed the correct number in ${trial} attempts. `
+          );
+          console.log("if you wish to go again: ");
+          difficultyLevel();
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  hardGameEngine();
+}
+
+function mediumGame() {
+  let chances = 5;
+  let trial = 0;
+  let user;
+  const gameIntro =
+    " Great! You have selected the medium difficulty level. \n Let's start the game \n";
+  console.log(gameIntro);
+
+  function mediumGameEngine() {
+    try {
+      rl.question("Enter your guess: ", (number) => {
+        user = parseInt(number);
+        if (isNaN(user)) {
+          const msg = "Text not allowed; kindly input a digit between 1 - 100";
+          console.log(msg);
+          mediumGame();
+        }
+        if (chances == 0) {
+          const msg1 = "game over you ran out of chances, you LOSERRRRRR";
+          const msg2 = "well if you wish to play again";
+          console.log(msg1, msg2);
+          return;
+        }
+
+        if (user !== RandomNumber) {
+          chances--;
+          trial++;
+          if (user < RandomNumber) {
+            console.log(` Incorrect! The number is greater than ${user}.`);
+            mediumGameEngine();
+          } else if (user > RandomNumber) {
+            console.log(`Incorrect! The number is less than ${user}.`);
+            mediumGameEngine();
+          }
+        } else {
+          console.log(
+            ` congratulation you won, \n you guessed the correct number in ${trial} attempts. `
+          );
+          console.log("if you wish to go again: ");
+          difficultyLevel();
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  mediumGameEngine();
+}
 function easyGame() {
   let chances = 10;
   let trial = 0;
